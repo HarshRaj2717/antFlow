@@ -1,0 +1,112 @@
+/* Basic Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e9ecef; /* A light gray background for a professional look */
+    margin: 0;
+    padding: 0;
+  }
+  h1 {
+    text-decoration: underline;
+  }
+  
+  /* Container Styles */
+  .container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 40px;
+    background-color: #fff; /* White background for form container */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
+    border-radius: 8px;
+  }
+  
+  /* Form Header */
+  h1 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Form Group Styles */
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  input,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+  
+  textarea {
+    resize: vertical;
+  }
+  
+  /* Adding spacing between the selected skills input and select dropdown */
+  #skills {
+    margin-top: 10px; /* Adds space above the dropdown */
+    width: 100%; /* Ensures the dropdown takes up the full width of the form */
+    padding: 12px; /* Adds padding inside the select dropdown */
+    font-size: 16px; /* Makes the text in the dropdown larger */
+    height: auto; /* Automatically adjusts the height based on content */
+    border-radius: 4px; /* Round corners for the dropdown */
+    border: 1px solid #ccc; /* Border color */
+  }
+  
+  /* Adding spacing between the selected skills input and select dropdown */
+  #selectedSkills {
+    margin-bottom: 15px; /* Adds space below the selected skills input */
+    height: 40px; /* Increase the height of the search box */
+    font-size: 16px; /* Slightly increase the font size */
+    padding: 12px; /* Increase the padding inside the input field */
+  }
+  /* Button Styles */
+  button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4caf50;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Back Button: Aligning top-left corner */
+  .back-btn {
+    position: fixed; /* Fix the position of the anchor tag */
+    top: 20px; /* Set distance from the top */
+    left: 20px; /* Set distance from the left */
+    padding: 10px; /* Add padding for better click area */
+    background-color: transparent; /* Ensure the background is transparent */
+    border: none; /* Remove any default border */
+    z-index: 999; /* Ensure it stays on top of other elements */
+  }
+  
+  /* Back Button Image */
+  .back-icon {
+    width: 30px; /* Set width of the back icon */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+  }
+  
+  /* Optional: Add hover effect */
+  .back-btn:hover .back-icon {
+    opacity: 0.8;
+  }
+  
