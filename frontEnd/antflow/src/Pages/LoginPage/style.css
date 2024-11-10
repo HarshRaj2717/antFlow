@@ -1,0 +1,7 @@
+.bod{
+    background: url('../../Assets/img/backgroundImg.webp') no-repeat right center/contain,
+                      linear-gradient(287.15deg, #fafbfc, #deebff 8.06%, #b3d4ff 35.45%, #deebff 77.6%, #fafbfc);
+    height: 100vh;
+    position: relative;
+    margin-top: 0;
+}
