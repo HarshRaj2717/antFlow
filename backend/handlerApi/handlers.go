@@ -1,8 +1,10 @@
 package handlers
 
 import (
-    "encoding/json"
-    "net/http"
+	"bytes"
+	"encoding/json"
+	// "fmt"
+	"net/http"
 )
 
 // Define response structure
@@ -194,6 +196,47 @@ func FetchProjectsByUserEmail(w http.ResponseWriter, r *http.Request) {
     jsonResponse(w, user.ProjectInfoList)
 }
 
+func prompter(w http.ResponseWriter, r *http.Request) {
+    if r.Method != http.MethodPost {
+        http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+        return
+    }
+
+    var requestData struct {
+        ProjectDescription string `json:"project_description"`
+    }
+
+    if err := json.NewDecoder(r.Body).Decode(&requestData); err != nil {
+        http.Error(w, "Invalid request body", http.StatusBadRequest)
+        return
+    }
+
+    // Create proper JSON payload
+    payload, err := json.Marshal(map[string]string{
+        "project_description": requestData.ProjectDescription,
+    })
+    if err != nil {
+        http.Error(w, "Failed to create request", http.StatusInternalServerError)
+        return
+    }
+
+    response, err := http.Post("http://localhost:8000", "application/json", bytes.NewBuffer(payload))
+    if err != nil {
+        http.Error(w, "Failed to send request", http.StatusInternalServerError)
+        return
+    }
+    defer response.Body.Close()
+
+    var result map[string]interface{}
+    if err := json.NewDecoder(response.Body).Decode(&result); err != nil {
+        http.Error(w, "Failed to decode response", http.StatusInternalServerError)
+        return
+    }
+
+    jsonResponse(w, result)
+}
+
+
 // Utility function to send JSON responses
 func jsonResponse(w http.ResponseWriter, data interface{}) {
     w.Header().Set("Content-Type", "application/json")
@@ -207,5 +250,6 @@ func AddRoutes(router *http.ServeMux) {
     router.HandleFunc("/api/addEmployee", AddEmployee)
     router.HandleFunc("/api/addProject", AddProject)
     router.HandleFunc("/api/fetchEmployeesByUserEmail", FetchEmployeesByUserEmail)
+    router.HandleFunc("/api/prompter", prompter)    
     router.HandleFunc("/api/fetchProjectsByUserEmail", FetchProjectsByUserEmail)
 }
