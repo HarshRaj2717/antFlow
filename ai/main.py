@@ -23,7 +23,7 @@ class PromptModel(BaseModel):
 
 @app.post("/")
 async def main(request: PromptModel):
-    with open("example.json") as f:
-        return json.load(f)
+    # with open("example.json") as f:
+    #     return json.load(f)
 
-    # return {"data": prompter(request.project_description)}
+    return {"data": prompter(request.project_description)}
