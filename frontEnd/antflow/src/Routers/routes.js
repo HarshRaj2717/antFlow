@@ -7,6 +7,7 @@ import AddNewProjectForm from '../Pages/AddNewProject';
 import EmployeeList from '../Pages/EmployeeList';
 import ProjectList from '../Pages/ProjectList'; 
 import AntFlow from '../Pages/Antflow';
+import Ai from '../Pages/Ai';
 
 const AppRoute = () => { 
   return (
@@ -20,6 +21,7 @@ const AppRoute = () => {
         <Route path='/add-new-project' element={<AddNewProjectForm />} />
         <Route exact path='/employee-list' element={<EmployeeList/>} />
         <Route exact path='/project-list' element={<ProjectList/>} />
+        <Route exact path='/ai' element={<Ai />} />
       </Routes>
     </Router>
   );

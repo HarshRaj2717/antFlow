@@ -4,7 +4,9 @@ import AppRoute from './Routers/routes';
 
 function App() {
   return (
-    <AppRoute />
+    <div className='m-2'>
+      <AppRoute />
+    </div>
   );
 }
 

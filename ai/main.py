@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
+import json
+
 from prompter import prompter
 
 app = FastAPI()
@@ -21,4 +23,7 @@ class PromptModel(BaseModel):
 
 @app.post("/")
 async def main(request: PromptModel):
-    return {"data": prompter(request.project_description)}
+    with open("example.json") as f:
+        return json.load(f)
+
+    # return {"data": prompter(request.project_description)}

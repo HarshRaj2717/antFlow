@@ -1,0 +1,79 @@
+{
+  "data": {
+    "project": "Note-taking Website",
+    "tasks": [
+      {
+        "task_id": 1,
+        "task_name": "Project Planning",
+        "task_description": "Define project scope, goals, and timelines. Determine technical requirements and select tools and frameworks.",
+        "estimated_time": "3",
+        "dependencies": [],
+        "required_skills": ["Project Management", "Stakeholder Communication"]
+      },
+      {
+        "task_id": 2,
+        "task_name": "Database Design",
+        "task_description": "Design a database schema to store user data and notes. Determine the relationships between tables and optimize database performance.",
+        "estimated_time": "4",
+        "dependencies": [],
+        "required_skills": ["Database Management"]
+      },
+      {
+        "task_id": 3,
+        "task_name": "Backend Development Setup",
+        "task_description": "Set up a new Django project and configure the project structure. Install required dependencies and configure the database.",
+        "estimated_time": "2",
+        "dependencies": [1, 2],
+        "required_skills": ["Python", "Django", "Database Management"]
+      },
+      {
+        "task_id": 4,
+        "task_name": "User Authentication Development",
+        "task_description": "Implement user authentication functionality using Django's built-in auth system. Create models for users and implement registration, login, and logout functionality.",
+        "estimated_time": "8",
+        "dependencies": [3],
+        "required_skills": ["Python", "Django", "Authentication"]
+      },
+      {
+        "task_id": 5,
+        "task_name": "Notes Model and API",
+        "task_description": "Create a model for notes and implement API endpoints for creating, reading, updating, and deleting notes.",
+        "estimated_time": "8",
+        "dependencies": [4],
+        "required_skills": ["Python", "Django", "API Integration"]
+      },
+      {
+        "task_id": 6,
+        "task_name": "Frontend Development",
+        "task_description": "Create a responsive and mobile-friendly front-end using HTML, CSS, and JavaScript. Implement user interface components and connect to the backend API.",
+        "estimated_time": "12",
+        "dependencies": [5],
+        "required_skills": ["Frontend Development", "UI/UX Design"]
+      },
+      {
+        "task_id": 7,
+        "task_name": "Testing and QA",
+        "task_description": "Write unit tests and integration tests for the backend and frontend. Conduct manual testing and ensure the application is working as expected.",
+        "estimated_time": "6",
+        "dependencies": [6],
+        "required_skills": ["Testing & QA"]
+      },
+      {
+        "task_id": 8,
+        "task_name": "Deployment",
+        "task_description": "Deploy the application on a cloud platform such as Heroku or AWS. Configure environment variables and ensure the application is running smoothly.",
+        "estimated_time": "4",
+        "dependencies": [7],
+        "required_skills": ["Cloud Infrastructure", "DevOps"]
+      },
+      {
+        "task_id": 9,
+        "task_name": "Documentation",
+        "task_description": "Create documentation for the application, including API documentation and user guides.",
+        "estimated_time": "4",
+        "dependencies": [8],
+        "required_skills": ["Technical Writing", "Documentation"]
+      }
+    ]
+  }
+}

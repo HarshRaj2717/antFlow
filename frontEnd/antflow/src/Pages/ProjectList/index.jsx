@@ -7,7 +7,6 @@ const ProjectList = () => {
   const [projects, setProjects] = useState([]);
   const navigate = useNavigate();
 
-
   useState(async () => {
     try {
       // Send the data as JSON to the backend using fetch
@@ -43,6 +42,12 @@ const ProjectList = () => {
     navigate(-1);
   };
 
+  const handleSendToAntFlow = (project) => {
+    localStorage.setItem("project_name", project.project_name);
+    localStorage.setItem("project_description", project.description);
+    window.location.href = "/ai";
+  };
+
   return (
     <Container>
       <button
@@ -72,6 +77,12 @@ const ProjectList = () => {
                 <Typography variant="body2" color="text.secondary" gutterBottom>
                   {project.description}
                 </Typography>
+                <btn
+                  onClick={() => handleSendToAntFlow(project)}
+                  className="bg-blue-500 hover:bg-blue-300 p-1 italic shadow-lg rounded-md font-mono cursor-pointer"
+                >
+                  Send to AntFlow AI
+                </btn>
               </CardContent>
             </Card>
           </Grid2>
