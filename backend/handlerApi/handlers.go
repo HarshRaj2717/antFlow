@@ -26,14 +26,13 @@ type EmployeeInfo struct {
     ID      string `json:"id"`
     Name    string `json:"name"`
     Email   string `json:"email"`
-    Skill   string `json:"skill"`
+    Skill   []string `json:"skill"`
     History string `json:"history"`
 }
 
 type ProjectInfo struct {
     ProjectName string `json:"project_name"`
     Description string `json:"description"`
-    TechStack   string `json:"tech_stack"`
 }
 
 // Global in-memory storage
