@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TextField, Button, Box, Typography } from "@mui/material";
-import backIcon from '../../Assets/img/backIcon.jpg'
+import backIcon from "../../Assets/img/backIcon.jpg";
 
 const AddNewProjectForm = () => {
   const [projectName, setProjectName] = useState("");
@@ -23,13 +23,17 @@ const AddNewProjectForm = () => {
 
     // Create the JSON data object
     const projectData = {
-      name: projectName,
-      description: projectDescription,
+      user_email: localStorage.getItem("user_email"),
+      projectInfo: {
+        project_name: projectName,
+        description: projectDescription,
+        tech_stack: "",
+      },
     };
 
     try {
       // Send data to backend
-      const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+      const response = await fetch("http://localhost:8080/api/addProject", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -40,8 +44,9 @@ const AddNewProjectForm = () => {
       // Check if the response is successful
       if (response.ok) {
         alert("Project added successfully!");
-        
-        // Clear form after successful submission
+        const data = await response.json();
+        console.log(data);
+        window.location.href = "/home";
         setProjectName("");
         setProjectDescription("");
         setErrors({ name: false, description: false });
@@ -59,64 +64,66 @@ const AddNewProjectForm = () => {
 
   return (
     <>
-    <button onClick={handleBack} style={{width:"60px"}}>
-    <img src={backIcon} alt="Back" className="back-icon" />
-    </button> 
-    <Box
-      component="form"
-      onSubmit={handleSubmit}
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        maxWidth: 600,
-        margin: "auto",
-        padding: 3,
-        borderRadius: 2,
-        boxShadow: 3,
-        backgroundColor: "white",
-      }}
-    >
-      <Typography variant="h5" sx={{ mb: 2 }}>
-        Add New Project
-      </Typography>
-
-      <TextField
-        label="Project Name"
-        variant="outlined"
-        value={projectName}
-        onChange={(e) => setProjectName(e.target.value)}
-        fullWidth
-        required
-        error={errors.name}
-        helperText={errors.name ? "Project name is required." : ""}
-        sx={{ mb: 2 }}
-      />
-
-      <TextField
-        label="Project Description"
-        variant="outlined"
-        value={projectDescription}
-        onChange={(e) => setProjectDescription(e.target.value)}
-        fullWidth
-        required
-        multiline
-        rows={4}
-        error={errors.description}
-        helperText={errors.description ? "Project description is required." : ""}
-        sx={{ mb: 2 }}
-      />
-
-      <Button
-        type="submit"
-        variant="contained"
-        color="primary"
-        fullWidth
-        sx={{ mt: 2 }}
+      <button onClick={handleBack} style={{ width: "60px" }}>
+        <img src={backIcon} alt="Back" className="back-icon" />
+      </button>
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          maxWidth: 600,
+          margin: "auto",
+          padding: 3,
+          borderRadius: 2,
+          boxShadow: 3,
+          backgroundColor: "white",
+        }}
       >
-        Add Project
-      </Button>
-    </Box>
+        <Typography variant="h5" sx={{ mb: 2 }}>
+          Add New Project
+        </Typography>
+
+        <TextField
+          label="Project Name"
+          variant="outlined"
+          value={projectName}
+          onChange={(e) => setProjectName(e.target.value)}
+          fullWidth
+          required
+          error={errors.name}
+          helperText={errors.name ? "Project name is required." : ""}
+          sx={{ mb: 2 }}
+        />
+
+        <TextField
+          label="Project Description"
+          variant="outlined"
+          value={projectDescription}
+          onChange={(e) => setProjectDescription(e.target.value)}
+          fullWidth
+          required
+          multiline
+          rows={4}
+          error={errors.description}
+          helperText={
+            errors.description ? "Project description is required." : ""
+          }
+          sx={{ mb: 2 }}
+        />
+
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          fullWidth
+          sx={{ mt: 2 }}
+        >
+          Add Project
+        </Button>
+      </Box>
     </>
   );
 };

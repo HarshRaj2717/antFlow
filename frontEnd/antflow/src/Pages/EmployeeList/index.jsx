@@ -30,7 +30,7 @@ const EmployeeList = () => {
         setUserData(result);
       } else {
         // Handle error response
-        console.error("Failed to add employee:", response.statusText);
+        console.error("error:", response.statusText);
         alert("Error getting employees. Please try again.");
       }
     } catch (error) {

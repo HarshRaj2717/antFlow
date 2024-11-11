@@ -1,55 +1,64 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Container, Grid2, Card, CardContent, Typography} from '@mui/material';
-import { FaArrowLeft } from 'react-icons/fa';
-
-const projectData = [
-  {
-    name: "Project A",
-    description: "Description for Project A",
-  },
-  {
-    name: "Project B",
-    description: "Description for Project B",
-  },
-  {
-    name: "Project C",
-    description: "Description for Project C",
-  },
-  {
-    name: "Project D",
-    description: "Description for Project D",
-  },
-  {
-    name: "Project E",
-    description: "Description for Project E",
-  },
-  {
-    name: "Project F",
-    description: "Description for Project F",
-  },
-];
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Container, Grid2, Card, CardContent, Typography } from "@mui/material";
+import { FaArrowLeft } from "react-icons/fa";
 
 const ProjectList = () => {
-  const [projects, setProjects] = useState(projectData);
+  const [projects, setProjects] = useState([]);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    setProjects(projectData);
-  },[]) ;
+
+  useState(async () => {
+    try {
+      // Send the data as JSON to the backend using fetch
+      const response = await fetch(
+        "http://localhost:8080/api/fetchProjectsByUserEmail",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user_email: localStorage.getItem("user_email"),
+          }),
+        }
+      );
+
+      if (response.ok) {
+        // Successfully sent data, handle success response here
+        const result = await response.json();
+        setProjects(result);
+      } else {
+        // Handle error response
+        console.error("error:", response.statusText);
+        alert("Error getting employees. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred. Please try again.");
+    }
+  }, []);
 
   const handleBack = () => {
     navigate(-1);
-  }
-  const navigate = useNavigate();
+  };
 
   return (
     <Container>
-    <button onClick={handleBack} style={{ width: "60px", display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <FaArrowLeft /> {/* Add the icon */}
-    </button>
+      <button
+        onClick={handleBack}
+        style={{
+          width: "60px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <FaArrowLeft /> {/* Add the icon */}
+      </button>
       <Typography variant="h4" align="center" gutterBottom>
         Projects
-      </Typography> 
+      </Typography>
 
       <Grid2 container spacing={4}>
         {/* Mapping through projects and displaying them in a grid2 */}
@@ -58,7 +67,7 @@ const ProjectList = () => {
             <Card variant="outlined">
               <CardContent>
                 <Typography variant="h5" component="div">
-                  {project.name}
+                  {project.project_name}
                 </Typography>
                 <Typography variant="body2" color="text.secondary" gutterBottom>
                   {project.description}
