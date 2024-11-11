@@ -44,12 +44,12 @@ export default function SignIn() {
     }
  
     const loginData = {
-      email: email,
+      user_email: email,
       password: password,
     };
 
     try { 
-      const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+      const response = await fetch("http://localhost:8080/api/authenticateLogin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -59,14 +59,16 @@ export default function SignIn() {
  
       if (response.ok) {
        // alert("Project added successfully!");
-        setEmail("");
-        setPassword(""); 
+        const data = await response.json();
+        console.log("data",data);
+        localStorage.setItem("user_email", loginData.user_email);
+        window.location.href = "/home";
       } else {
-        alert("Failed to add project. Please try again.");
+        alert("Failed to log in. Please try again.");
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("An error occurred while adding the project.");
+      alert("An error occurred while logging in.");
     }
   };
 
