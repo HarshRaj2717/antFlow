@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Grid2, Card, CardContent, Typography } from "@mui/material";
 import { FaArrowLeft } from "react-icons/fa";
+import DependencyGraphComponent from "../../Components/DependencyGraphComponent";
 
 export default function Ai() {
   const [promptRes, setPromptRes] = useState({});
@@ -39,6 +40,18 @@ export default function Ai() {
       alert("An error occurred. Please try again.");
     }
   }, []);
+// format 
+  const dependecyData = [
+      { task_id: 1, task_name: "Project Planning", dependencies: [] },
+      { task_id: 2, task_name: "Database Design", dependencies: [] },
+      { task_id: 3, task_name: "Backend Development Setup", dependencies: [1, 2] },
+      { task_id: 4, task_name: "User Authentication Development", dependencies: [3] },
+      { task_id: 5, task_name: "Notes Model and API", dependencies: [4] },
+      { task_id: 6, task_name: "Frontend Development", dependencies: [5] },
+      { task_id: 7, task_name: "Testing and QA", dependencies: [6] },
+      { task_id: 8, task_name: "Deployment", dependencies: [7] },
+      { task_id: 9, task_name: "Documentaion", dependencies: [8] }
+    ];
 
   if (!promptRes.data) {
     return (
@@ -115,6 +128,7 @@ export default function Ai() {
                   <Typography variant="body2" color="textSecondary">
                     Dependencies: {task.dependencies.join(" + ")}
                   </Typography>
+                  <DependencyGraphComponent tasks={dependecyData}/>
                 </CardContent>
               </Card>
             ))}
