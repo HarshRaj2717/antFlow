@@ -30,8 +30,13 @@ def prompter(promt: str) -> dict:
         response_format={"type": "json_object"},
         stop=None,
     )
-
+    with open("out.json", "w") as f:
+        f.write(str(completion))
     try:
+        print("\n\n\nAntFlow AI Stats:\n")
+        print("Total Time Taken:", completion.usage.total_time, "seconds") # type: ignore
+        print("Total Tokens Used:", completion.usage.total_tokens) # type: ignore
+        print("\n\n\n")
         return json.loads(completion.choices[0].message.content)
     except:
         return prompter(promt)
