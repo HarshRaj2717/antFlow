@@ -41,7 +41,7 @@ export default function Ai() {
       alert("An error occurred. Please try again.");
     }
   }, []);
-// format 
+  // format
   // const dependecyData = [
   //     { task_id: 1, task_name: "Project Planning", dependencies: [] },
   //     { task_id: 2, task_name: "Database Design", dependencies: [] },
@@ -111,7 +111,7 @@ export default function Ai() {
               {promptRes.data.project}
             </Typography>
 
-            <DependencyGraphComponent promptRes={promptRes}/>
+            <DependencyGraphComponent promptRes={promptRes} />
 
             {promptRes.data.tasks.map((task) => (
               <Card key={task.task_id} style={{ marginBottom: "20px" }}>
