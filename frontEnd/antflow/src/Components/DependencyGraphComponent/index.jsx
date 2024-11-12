@@ -1,7 +1,7 @@
 import React from "react";
 import DependencyGraph from "./DependencyGraph";
 
-const DependencyGraphComponent = ({tasks = []}) => {
+const DependencyGraphComponent = ({ promptRes }) => {
   //tasks format
   // const tasks = [
   //     { task_id: 1, task_name: "Project Planning", dependencies: [] },
@@ -15,9 +15,23 @@ const DependencyGraphComponent = ({tasks = []}) => {
   //     { task_id: 9, task_name: "Documentation", dependencies: [8] }
   //   ];
 
+  const [tasks, setTasks] = React.useState([]);
+
+  React.useEffect(() => {
+    let task = [];
+    promptRes.data.tasks.map((t) => {
+      task.push({
+        task_id: t.task_id,
+        task_name: t.task_name,
+        dependencies: t.dependencies,
+      });
+    });
+    setTasks(task);
+  }, []);
+
   return (
     <div>
-      <DependencyGraph tasks={tasks}/>
+      <DependencyGraph tasks={tasks} />
     </div>
   );
 };

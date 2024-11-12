@@ -21,6 +21,7 @@ export default function Ai() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          user_email: localStorage.getItem("user_email"),
           project_description: localStorage.getItem("project_description"),
         }),
       });
@@ -41,17 +42,17 @@ export default function Ai() {
     }
   }, []);
 // format 
-  const dependecyData = [
-      { task_id: 1, task_name: "Project Planning", dependencies: [] },
-      { task_id: 2, task_name: "Database Design", dependencies: [] },
-      { task_id: 3, task_name: "Backend Development Setup", dependencies: [1, 2] },
-      { task_id: 4, task_name: "User Authentication Development", dependencies: [3] },
-      { task_id: 5, task_name: "Notes Model and API", dependencies: [4] },
-      { task_id: 6, task_name: "Frontend Development", dependencies: [5] },
-      { task_id: 7, task_name: "Testing and QA", dependencies: [6] },
-      { task_id: 8, task_name: "Deployment", dependencies: [7] },
-      { task_id: 9, task_name: "Documentaion", dependencies: [8] }
-    ];
+  // const dependecyData = [
+  //     { task_id: 1, task_name: "Project Planning", dependencies: [] },
+  //     { task_id: 2, task_name: "Database Design", dependencies: [] },
+  //     { task_id: 3, task_name: "Backend Development Setup", dependencies: [1, 2] },
+  //     { task_id: 4, task_name: "User Authentication Development", dependencies: [3] },
+  //     { task_id: 5, task_name: "Notes Model and API", dependencies: [4] },
+  //     { task_id: 6, task_name: "Frontend Development", dependencies: [5] },
+  //     { task_id: 7, task_name: "Testing and QA", dependencies: [6] },
+  //     { task_id: 8, task_name: "Deployment", dependencies: [7] },
+  //     { task_id: 9, task_name: "Documentaion", dependencies: [8] }
+  //   ];
 
   if (!promptRes.data) {
     return (
@@ -110,6 +111,8 @@ export default function Ai() {
               {promptRes.data.project}
             </Typography>
 
+            <DependencyGraphComponent promptRes={promptRes}/>
+
             {promptRes.data.tasks.map((task) => (
               <Card key={task.task_id} style={{ marginBottom: "20px" }}>
                 <CardContent>
@@ -128,7 +131,6 @@ export default function Ai() {
                   <Typography variant="body2" color="textSecondary">
                     Dependencies: {task.dependencies.join(" + ")}
                   </Typography>
-                  <DependencyGraphComponent tasks={dependecyData}/>
                 </CardContent>
               </Card>
             ))}
